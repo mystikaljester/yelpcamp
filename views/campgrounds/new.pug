@@ -1,0 +1,17 @@
+include ../partials/header.pug
+body
+  include ../partials/navbar.pug
+  .container
+    .row
+      h1(style='text-align: center;') Create a new campground
+      div(style='width: 30%; margin: 25px auto')
+        form(action='/campgrounds' method='POST')
+          .form-group
+            input.form-control(type='text' name='name' value='' placeholder='name')
+          .form-group
+            input.form-control(type='text' name='image' value='' placeholder='image url')
+          .form-group
+            input.form-control(type='text' name='description' value='' placeholder='description')
+          .form-group
+            button.btn.btn-lg.btn-primary.btn-block(type='submit' name='button') Add new camp
+        a(href='/campgrounds') Go Back

@@ -1,0 +1,30 @@
+include ../partials/header.pug
+body
+  include ../partials/navbar.pug
+  .container
+    .row
+      .col-md-3
+        p.lead yelp_camp
+          .list-group
+            .list-group-item.active Info 1
+            .list-group-item Info 2
+            .list-group-item Info 3
+      .col-md-9
+        .thumbnail
+          img(src=campground.image alt=campground.name).img-responsive
+          .caption-full
+              h4.pull-right $9.00/night
+              h4
+                a(href=)= campground.name
+              p= campground.description
+        .well
+          .text-right
+            p
+              a(href='/campgrounds/' + campground._id + '/comments/new').btn.btn-success Leave a review
+          hr
+          each comment in campground.comments
+            .row
+              .col-md-12
+                strong= comment.author
+                span.pull-right 10 days ago
+                p= comment.text

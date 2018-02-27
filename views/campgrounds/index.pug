@@ -1,0 +1,21 @@
+include ../partials/header.pug
+body
+  include ../partials/navbar.pug
+  .container
+    header.jumbotron
+      .container
+        h1 Welcome to YelpCamp
+        p View all of our handpicked Campgrounds
+        p
+          a.btn.btn-primary.btn-lg(href='/campgrounds/new') New Campground
+    .row
+      h3 Our most popular campgrounds!
+    .row.text-center(style='display: flex; flex-wrap: wrap')
+      each campground in campgrounds
+        .col-md-3.col-sm-6
+          .thumbnail
+            img(src=campground.image alt='stuff')
+            .caption
+              h4= campground.name
+              p
+                a.btn.btn-primary(href='/campgrounds/' + campground._id) More Info

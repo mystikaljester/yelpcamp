@@ -1,0 +1,15 @@
+include ../partials/header.pug
+body
+  include ../partials/navbar.pug
+  .container
+    .row
+      h1(style='text-align: center;') Add new comment to #{campground.name}
+      div(style='width: 30%; margin: 25px auto')
+        form(action='/campgrounds/' + campground._id + '/comments' method='POST')
+          .form-group
+            input.form-control(type='text' name='comment[text]' value='' placeholder='comment text')
+          .form-group
+            input.form-control(type='text' name='comment[author]' value='' placeholder='author')
+          .form-group
+            button.btn.btn-lg.btn-primary.btn-block(type='submit' name='button') Add new camp
+        a(href='/campgrounds') Go Back
