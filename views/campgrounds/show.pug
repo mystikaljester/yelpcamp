@@ -4,7 +4,7 @@ body
   .container
     .row
       .col-md-3
-        p.lead yelp_camp
+        p.lead YelpCamp
           .list-group
             .list-group-item.active Info 1
             .list-group-item Info 2
@@ -12,11 +12,16 @@ body
       .col-md-9
         .thumbnail
           img(src=campground.image alt=campground.name).img-responsive
-          .caption-full
+          .caption
               h4.pull-right $9.00/night
               h4
                 a(href=)= campground.name
               p= campground.description
+              p
+                em= 'Submitted by ' + campground.author.username
+              a(href='/campgrounds/' + campground._id + '/edit').btn.btn-xs.btn-warning Edit
+              form(action='/campgrounds/' + campground._id + '?_method=DELETE' method='POST')#deleteForm
+                button.btn.btn-xs.btn-danger Delete
         .well
           .text-right
             p
@@ -25,6 +30,6 @@ body
           each comment in campground.comments
             .row
               .col-md-12
-                strong= comment.author
+                strong= comment.author.username
                 span.pull-right 10 days ago
                 p= comment.text

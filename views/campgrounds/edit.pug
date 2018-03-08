@@ -1,0 +1,17 @@
+include ../partials/header.pug
+body
+  include ../partials/navbar.pug
+  .container
+    .row
+      h1(style='text-align: center;')= 'Edit ' + campground.name
+      div(style='width: 30%; margin: 25px auto')
+        form(action='/campgrounds/' + campground._id + '?_method=PUT' method='POST')
+          .form-group
+            input.form-control(type='text' name='campground[name]' value=campground.name)
+          .form-group
+            input.form-control(type='text' name='campground[image]' value=campground.image)
+          .form-group
+            input.form-control(type='text' name='campground[description]' value=campground.description)
+          .form-group
+            button.btn.btn-lg.btn-primary.btn-block(type='submit' name='button') Submit
+        a(href='/campgrounds') Go Back
