@@ -7,7 +7,7 @@ body
       div(style='width: 30%; margin: 25px auto')
         form(action='/campgrounds/' + campground._id + '/comments' method='POST')
           .form-group
-            input.form-control(type='text' name='comment[text]' value='' placeholder='comment text')
+            input.form-control(type='text' name='comment[text]' value='' placeholder='comment text' autofocus)
           .form-group
             button.btn.btn-lg.btn-primary.btn-block(type='submit' name='button') Add new camp
         a(href='/campgrounds') Go Back

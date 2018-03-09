@@ -7,7 +7,7 @@ body
       div(style='width: 30%; margin: 25px auto')
         form(action='/campgrounds/' + campground._id + '?_method=PUT' method='POST')
           .form-group
-            input.form-control(type='text' name='campground[name]' value=campground.name)
+            input.form-control(type='text' name='campground[name]' value=campground.name autofocus)
           .form-group
             input.form-control(type='text' name='campground[image]' value=campground.image)
           .form-group
