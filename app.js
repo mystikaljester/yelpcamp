@@ -1,13 +1,14 @@
 var express           = require('express'),
     app               = express(),
-    bodyParser        = require('body-parser'),
-    mongoose          = require("mongoose"),
-    pug               = require('pug'),
-    request           = require('request'),
-    seedDB            = require('./seeds'),
-    passport          = require('passport'),
-    LocalStrategy     = require('passport-local'),
-    methodOverride    = require('method-override'),
+    bodyParser        = require('body-parser'), //to pull information from forms
+    mongoose          = require("mongoose"), //because mongodb
+    pug               = require('pug'), //our html preprocessor
+    request           = require('request'), //lets us submit http requests
+    seedDB            = require('./seeds'), //allows database seeding
+    flash             = require('connect-flash'), //allows for flash messages (err handling)
+    passport          = require('passport'), //authentication woo!
+    LocalStrategy     = require('passport-local'), //allows only local un/pw
+    methodOverride    = require('method-override'), //lets us override PUT because unsupport.
     /* models */
     Campground        = require('./models/campground'),
     Comment           = require('./models/comment'),
@@ -24,6 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 // seedDB(); // seed the database
+app.use(flash());
 
 // PASSPORT CONFIGURATION
 app.use(require('express-session')({
@@ -40,6 +42,9 @@ passport.deserializeUser(User.deserializeUser());
 // middleware which passes user to every template;
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.error = req.flash('error');
+  res.locals.success = req.flash('success');
+
   next();
 });
 

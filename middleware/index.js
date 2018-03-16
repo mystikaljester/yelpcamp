@@ -8,16 +8,23 @@ var middlewareObj = {};
     if(req.isAuthenticated()){
       Campground.findById(req.params.id, (err, foundCampground) => {
         if(err) {
+          req.flash('error', 'Campground not found');
           res.redirect('back');
         } else {
+          if (!foundCampground) {
+            req.flash('error', 'Item not found');
+            res.redirect('back');
+          }
           if(foundCampground.author.id.equals(req.user._id)) {
             next();
           } else {
+            req.flash('error', "Hey...you there...that's not yours!");
             res.redirect('back');
           }
         }
       });
     } else {
+      req.flash('error', 'Please log in first');
       res.redirect('back');
     }
   }
@@ -28,9 +35,14 @@ var middlewareObj = {};
         if(err) {
           res.redirect('back');
         } else {
+          if (!foundCampground) {
+            req.flash('error', 'Item not found');
+            res.redirect('back');
+          }
           if(foundComment.author.id.equals(req.user._id)) {
             next();
           } else {
+            req.flash('error', "Whoah now.  That's not yours!");
             res.redirect('back');
           }
         }
@@ -44,6 +56,7 @@ var middlewareObj = {};
     if(req.isAuthenticated()) {
       return next();
     }
+    req.flash('error', 'Please login first!');
     res.redirect('/login');
   }
 
